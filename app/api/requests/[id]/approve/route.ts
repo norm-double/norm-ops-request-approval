@@ -26,7 +26,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const role = getCurrentRole();
 
   try {
-    const updated = approveOrReject(requestId, role, decision);
+    const updated = await approveOrReject(requestId, role, decision);
     return NextResponse.json({ request: updated });
   } catch (err) {
     if (err instanceof RequestError) {

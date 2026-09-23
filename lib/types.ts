@@ -44,7 +44,7 @@ export interface RequestRecord {
   requester: string;
   status: RequestStatus;
   currentLevel: number;
-  evidencePath: string | null;
+  evidenceUrl: string | null;
   evidenceOriginalName: string | null;
   createdAt: string;
   updatedAt: string;

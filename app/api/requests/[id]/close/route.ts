@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   const role = getCurrentRole();
 
   try {
-    const updated = closeRequest(requestId, role);
+    const updated = await closeRequest(requestId, role);
     return NextResponse.json({ request: updated });
   } catch (err) {
     if (err instanceof RequestError) {

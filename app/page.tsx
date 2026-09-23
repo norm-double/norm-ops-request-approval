@@ -4,8 +4,8 @@ import { formatDate, formatUsd, statusBadgeClass, statusLabel } from '@/lib/form
 
 export const dynamic = 'force-dynamic';
 
-export default function StatusListPage() {
-  const requests = listRequests();
+export default async function StatusListPage() {
+  const requests = await listRequests();
 
   return (
     <div className="card">

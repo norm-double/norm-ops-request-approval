@@ -7,7 +7,16 @@ export async function GET() {
   if (!canAdmin(role)) {
     return NextResponse.json({ error: 'Only the Admin role can view approval rules' }, { status: 403 });
   }
-  return NextResponse.json({ rules: getApprovalRules() });
+
+  try {
+    return NextResponse.json({ rules: await getApprovalRules() });
+  } catch (err) {
+    if (err instanceof RequestError) {
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
+    console.error(err);
+    return NextResponse.json({ error: 'Unexpected error reading approval rules' }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -24,7 +33,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const rules = setApprovalRule(body.type, Number(body.requiredLevels));
+    const rules = await setApprovalRule(body.type, Number(body.requiredLevels));
     return NextResponse.json({ rules });
   } catch (err) {
     if (err instanceof RequestError) {

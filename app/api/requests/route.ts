@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const request = createRequest({
+    const request = await createRequest({
       type: body.type,
       title: body.title,
       description: body.description ?? '',

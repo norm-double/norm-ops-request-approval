@@ -6,19 +6,19 @@ import RequestActions from '@/components/RequestActions';
 
 export const dynamic = 'force-dynamic';
 
-export default function RequestDetailPage({ params }: { params: { id: string } }) {
+export default async function RequestDetailPage({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   if (!Number.isInteger(id)) {
     notFound();
   }
 
-  const request = getRequest(id);
+  const request = await getRequest(id);
   if (!request) {
     notFound();
   }
 
   const role = getCurrentRole();
-  const requiredLevels = getRequiredLevels(request.type);
+  const requiredLevels = await getRequiredLevels(request.type);
 
   return (
     <div className="card">
@@ -59,11 +59,11 @@ export default function RequestDetailPage({ params }: { params: { id: string } }
         <div className="value">{request.description || <span className="muted">—</span>}</div>
       </div>
 
-      {request.evidencePath && (
+      {request.evidenceUrl && (
         <div className="detail-item" style={{ marginBottom: 20 }}>
           <div className="label">Evidence</div>
           <div className="value">
-            <a href={`/api/uploads/${encodeURIComponent(request.evidencePath)}`} target="_blank" rel="noreferrer">
+            <a href={request.evidenceUrl} target="_blank" rel="noreferrer">
               {request.evidenceOriginalName ?? 'View evidence'}
             </a>
           </div>

@@ -4,7 +4,7 @@ import AdminRulesTable from '@/components/AdminRulesTable';
 
 export const dynamic = 'force-dynamic';
 
-export default function AdminPage() {
+export default async function AdminPage() {
   const role = getCurrentRole();
 
   if (role !== 'Admin') {
@@ -18,7 +18,7 @@ export default function AdminPage() {
     );
   }
 
-  const rules = getApprovalRules();
+  const rules = await getApprovalRules();
 
   return (
     <div className="card">

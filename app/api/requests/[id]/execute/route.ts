@@ -25,7 +25,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   }
 
   try {
-    const updated = executeRequest(requestId, role, file);
+    const updated = await executeRequest(requestId, role, file);
     return NextResponse.json({ request: updated });
   } catch (err) {
     if (err instanceof RequestError) {
