@@ -1,0 +1,10 @@
+node_modules/
+.next/
+data/
+*.log
+
+# BMad tooling/planning files — not part of the app
+.agents/
+.claude/
+_bmad/
+_bmad-output/
